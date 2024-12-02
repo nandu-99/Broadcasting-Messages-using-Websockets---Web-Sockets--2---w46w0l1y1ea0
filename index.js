@@ -17,9 +17,11 @@ app.get('/', (req, res) => {
 
 // Handle WebSocket connections
 io.on('connection', (socket) => {
-
-  //write your code here
-
+  console.log("connected", socket.id)
+  socket.on("message", (message)=>{
+    console.log(message, socket.id)
+    socket.broadcast.emit("message", message);
+  })
 });
 
 // Start the server
